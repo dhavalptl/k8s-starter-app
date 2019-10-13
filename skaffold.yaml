@@ -1,0 +1,19 @@
+apiVersion: skaffold/v1beta16
+kind: Config
+metadata:
+  name: multi-containers
+build:
+  artifacts:
+    - image: dhvlptl/echo-server
+      context: src/echo-server
+    - image: dhvlptl/greetings-server
+      context: src/greetings-server
+  tagPolicy:
+    sha256: {}
+  local:
+    useBuildkit: false
+    useDockerCLI: false
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes-manifests/*.yaml

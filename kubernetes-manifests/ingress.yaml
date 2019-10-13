@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-router
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /echo
+            backend:
+              serviceName: echo-service
+              servicePort: 4000
+          - path: /greetings
+            backend:
+              serviceName: greetings-service
+              servicePort: 4000
